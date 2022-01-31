@@ -1,6 +1,6 @@
 ---
-title: "Untitled"
-author: "STAT 108"
+title: "STAT 108: Lab 3"
+author: "Timothy Lanthier"
 date: "1/26/2022"
 output: html_document
 ---
@@ -11,11 +11,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Data: Gift aid at Elmhurst College
 
+
 In today's lab, we will analyze the `elmhurst` dataset in the openintro package. This dataset contains information about 50 randomly selected students from the 2011 freshmen class at Elmhurst College. The data were originally sampled from a table on all 2011 freshmen at the college that was included in the article ["What Students Really Pay to go to College"](https://www.chronicle.com/article/What-Students-Really-Pay-to-Go/131435) in *The Chronicle of Higher Education* article.
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(modelr)
+library(openintro)
+```
 
 You can load the data from loading the openintro package, and then running the following command: 
 
-```{r eval = F}
+```{r, echo = false}
 data(elmhurst)
 ```
 
@@ -32,6 +40,11 @@ The `elmhurst` dataset contains the following variables:
 ## Exploratory Data Analysis
 
 1. Plot a histogram to examine the distribution of `gift_aid`. What is the approximate shape of the distribution? Also note if there are any outliers in the dataset.
+
+```{r}
+ggplot(data = elmhurst, aes(gift_aid)) +
+  geom_histogram()
+```
 
 2. To better understand the distribution of `gift_aid`, we would like calculate measures of center and spread of the distribution. Use the `summarise` function to calculate the appropriate measures of center (mean or median) and spread (standard deviation or IQR) based on the shape of the distribution from Exercise 1. Show the code and output, and state the measures of center and spread in your narrative. *Be sure to report your conclusions for this exercise and the remainder of the lab in dollars.*
 
