@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 In today's lab, we will analyze the `elmhurst` dataset in the openintro package. This dataset contains information about 50 randomly selected students from the 2011 freshmen class at Elmhurst College. The data were originally sampled from a table on all 2011 freshmen at the college that was included in the article ["What Students Really Pay to go to College"](https://www.chronicle.com/article/What-Students-Really-Pay-to-Go/131435) in *The Chronicle of Higher Education* article.
-```{r}
+```{r, message = F}
 library(tidyverse)
 library(knitr)
 library(broom)
@@ -23,7 +23,7 @@ library(openintro)
 
 You can load the data from loading the openintro package, and then running the following command: 
 
-```{r, echo = false}
+```{r, echo = F}
 data(elmhurst)
 ```
 
@@ -43,10 +43,25 @@ The `elmhurst` dataset contains the following variables:
 
 ```{r}
 ggplot(data = elmhurst, aes(gift_aid)) +
-  geom_histogram()
+  geom_histogram(binwidth = 2)
 ```
 
+The distribution appears to have a bell curve like shape. 'gift_aid' appears to be centered around about 20 and our distribution is fairly symmetric. We could make the argument that it is approximately normal. It looks like we have very few outliers as well. It looks like we might have an outlier at around 5 as well as one closer to 35. 
+
 2. To better understand the distribution of `gift_aid`, we would like calculate measures of center and spread of the distribution. Use the `summarise` function to calculate the appropriate measures of center (mean or median) and spread (standard deviation or IQR) based on the shape of the distribution from Exercise 1. Show the code and output, and state the measures of center and spread in your narrative. *Be sure to report your conclusions for this exercise and the remainder of the lab in dollars.*
+
+```{r}
+summarise(elmhurst, mean = mean(gift_aid), 
+          std_dev = sd(gift_aid),
+          min = min(gift_aid),
+          q1 = quantile(gift_aid, 0.25),
+          median = median(gift_aid),
+          q3 = quantile(gift_aid, 0.75),
+          max = max(gift_aid),
+          IQR = q3-q1)
+```
+
+Looking at our summary statistics, we have a mean of 19.935 and a similar mean of about 20.47. So on average students appear to have received around \$19,935 in aid and the typical student received around \$20,470 in aid. Seeing as our mean is smaller than our median we appear to have a slight negative skew although it seems quite insignificant. We also have a standard deviation of about \$5,460 and an IQR of \$7,265. Interpreting the IQR, this means that the spread in aid between the middle 50% of students is around \$7,265.
 
 3. Plot the distribution of `family_income` and calculate the appropriate summary statistics. Describe the distribution of `family_income` (shape, center, and spread, outliers) using the plot and appropriate summary statistics.  
 
