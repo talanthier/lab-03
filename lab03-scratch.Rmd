@@ -1,8 +1,10 @@
 ---
-title: "STAT 108: Lab 3"
+title: 'STAT 108: Lab 3'
 author: "Timothy Lanthier"
 date: "1/26/2022"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
