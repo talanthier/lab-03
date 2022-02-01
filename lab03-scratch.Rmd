@@ -83,36 +83,52 @@ Looking at the histogram, the distribution of family income has a somewhat heavy
 
 4. Create a scatterplot to display the relationship between `gift_aid` (response variable) and `family_income` (predictor variable). Use the scatterplot to describe the relationship between the two variables. Be sure the scatterplot includes informative axis labels and title. 
 ```{r}
-ggplot(elmhurst, aes(x = gift_aid, y= family_income)) + 
+ggplot(elmhurst, aes(y = gift_aid, x= family_income)) + 
   geom_point() +
-  labs(x = 'Gift Aid (Thousands of Dollars)', y= 'Family Income (Thousands of Dollars)')
+  labs(y = 'Gift Aid (Thousands of Dollars)', x= 'Family Income (Thousands of Dollars)')
 ```
-Looking at the scatterplot, it looks like there is a negative linear association between Gift Aid and Family Income. It appears that students with high family incomes tend to receive less aid. Meanwhile those with very small family incomes are receiving more aid.
+Looking at the scatterplot, it looks like there is a negative linear association between Gift Aid and Family Income. It appears that students with high family incomes tend to receive less aid. Meanwhile those with very small family incomes are receiving more aid. That being said, we can identify a few points that don't follow this trend. For example, there is one student who received about \$20,000 in aid but has a very high family income of around \$320,000.
 
 ## Simple Linear Regression
 
 5. Use the `lm` function to fit a simple linear regression model using `family_income` to explain variation in `gift_aid`. Complete the code below to assign your model a name, and use the `tidy` and `kable` functions to neatly display the model output. *Replace X and Y with the appropriate variable names.*
 
-```{r eval=FALSE}
-_____ <- lm(Y ~ X, data = _____)
-tidy(_____) %>% # output model
+```{r}
+income_model <- lm(gift_aid ~ family_income, data = elmhurst)
+tidy(income_model) %>% # output model
   kable(digits = 3) # format model output
 ```
 
 6. Interpret the slope in the context of the problem.
 
+Our model gives us a slope of -0.043. Since our variables both are in thousands of dollars, this means that according to our model, with an increase in family income of \$1,000 we would expect that the gift aid received would be reduced by \$43.
+
 7. When we fit a linear regression model, we make assumptions about the underlying relationship between the response and predictor variables. In practice, we can check that the assumptions hold by analyzing the residuals. Over the next few questions, we will examine plots of the residuals to determine if the assumptions are met.
 
 Let's begin by calculating the residuals and adding them to the dataset. Fill in the model name in the code below to add residuals to the original dataset using the `resid()` and `mutate()` functions.
 
-```{r eval=FALSE}
-_____<- _____ %>%
-  mutate(resid = residuals(_____))
+```{r}
+elmhurst_resid <- elmhurst %>%
+  mutate(resid = residuals(income_model))
+```
+
+
+```{r eval = FALSE, echo=FALSE}
+# Double Check
+ggplot(elmhurst_resid, aes(x = family_income, y = gift_aid)) +
+  geom_point() +
+  geom_function(fun = ~ 24.319 -0.043*.x)
 ```
 
 8. One of the assumptions for regression is that there is a linear relationship between the predictor and response variables. To check this assumption, we will examine a scatterplot of the residuals versus the predictor variable. 
 
 Create a scatterplot with the predictor variable on the *x* axis and residuals on the *y* axis. Be sure to include an informative title and properly label the axes. 
+
+```{r}
+ggplot(elmhurst_resid, aes(x = family_income, y = resid)) +
+  geom_point()
+```
+
 
 9. Examine the plot from the previous question to assess the linearity condition.  
 
