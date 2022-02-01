@@ -65,7 +65,29 @@ Looking at our summary statistics, we have a mean of 19.935 and a similar mean o
 
 3. Plot the distribution of `family_income` and calculate the appropriate summary statistics. Describe the distribution of `family_income` (shape, center, and spread, outliers) using the plot and appropriate summary statistics.  
 
-4. Create a scatterplot to display the relationship between `gift_aid` (response variable) and `family_income` (predictor variable). Use the scatterplot to describe the relationship between the two variables. Be sure the scatterplot includes informative axis labels and title.
+```{r}
+ggplot(data = elmhurst, aes(family_income)) +
+  geom_histogram(bins = 20) +
+  labs(x = 'Family Income (Thousands of Dollars)')
+
+summarise(elmhurst, mean = mean(family_income), 
+          std_dev = sd(family_income),
+          min = min(family_income),
+          q1 = quantile(family_income, 0.25),
+          median = median(family_income),
+          q3 = quantile(family_income, 0.75),
+          max = max(family_income),
+          IQR = q3-q1)
+```
+Looking at the histogram, the distribution of family income has a somewhat heavy positive skew. This is backed up by our summary statistics as the mean family income is about \$101,778 while the median is much lower at approximately \$88,061. We also have quite a few outliers. The spread of family income is also quite large. There is an IQR of \$73,095 indicating that there is a \$73,000 income difference from the 25th and 75th percentile. We also have a standard deviation of about \$63,000 which is also very lage. The highest family income is \$271,974, which is about $\frac{271.972 - 101.7785}{62.306} = 2.732$ standard deviations from the mean. Looking at our histogram, it looks like we have some families with incomes around the \$240,000 range which are also likely an outliers.
+
+4. Create a scatterplot to display the relationship between `gift_aid` (response variable) and `family_income` (predictor variable). Use the scatterplot to describe the relationship between the two variables. Be sure the scatterplot includes informative axis labels and title. 
+```{r}
+ggplot(elmhurst, aes(x = gift_aid, y= family_income)) + 
+  geom_point() +
+  labs(x = 'Gift Aid (Thousands of Dollars)', y= 'Family Income (Thousands of Dollars)')
+```
+Looking at the scatterplot, it looks like there is a negative linear association between Gift Aid and Family Income. It appears that students with high family incomes tend to receive less aid. Meanwhile those with very small family incomes are receiving more aid.
 
 ## Simple Linear Regression
 
