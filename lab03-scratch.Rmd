@@ -45,7 +45,8 @@ The `elmhurst` dataset contains the following variables:
 
 ```{r}
 ggplot(data = elmhurst, aes(gift_aid)) +
-  geom_histogram(binwidth = 2)
+  geom_histogram(binwidth = 2) +
+  labs(x = 'Gift Aid (Thousands of Dollars)', title = 'Distribution of Gift Aid')
 ```
 
 The distribution appears to have a bell curve like shape. 'gift_aid' appears to be centered around about 20 and our distribution is fairly symmetric. We could make the argument that it is approximately normal. It looks like we have very few outliers as well. It looks like we might have an outlier at around 5 as well as one closer to 35. 
@@ -70,7 +71,8 @@ Looking at our summary statistics, we have a mean of 19.935 and a similar mean o
 ```{r}
 ggplot(data = elmhurst, aes(family_income)) +
   geom_histogram(bins = 20) +
-  labs(x = 'Family Income (Thousands of Dollars)')
+  labs(x = 'Family Income (Thousands of Dollars)', 
+       title = 'Distribution of Family Income')
 
 summarise(elmhurst, mean = mean(family_income), 
           std_dev = sd(family_income),
@@ -87,7 +89,8 @@ Looking at the histogram, the distribution of family income has a somewhat heavy
 ```{r}
 ggplot(elmhurst, aes(y = gift_aid, x= family_income)) + 
   geom_point() +
-  labs(y = 'Gift Aid (Thousands of Dollars)', x= 'Family Income (Thousands of Dollars)')
+  labs(x = 'Family Income (Thousands of Dollars)', y = 'Gift Aid (Thousands of Dollars)',
+       title = 'Gift Aid against Family Income')
 ```
 Looking at the scatterplot, it looks like there is a negative linear association between Gift Aid and Family Income. It appears that students with high family incomes tend to receive less aid. Meanwhile those with very small family incomes are receiving more aid. That being said, we can identify a few points that don't follow this trend. For example, there is one student who received about \$20,000 in aid but has a very high family income of around \$320,000.
 
@@ -119,7 +122,9 @@ elmhurst_resid <- elmhurst %>%
 # Double Check
 ggplot(elmhurst_resid, aes(x = family_income, y = gift_aid)) +
   geom_point() +
-  geom_function(fun = ~ 24.319 -0.043*.x)
+  geom_function(fun = ~ 24.319 -0.043*.x) +
+  labs(x = 'Family Income (Thousands of Dollars)', y = 'Gift Aid (Thousands of Dollars)',
+       title = 'Gift Aid against Family Income')
 ```
 
 8. One of the assumptions for regression is that there is a linear relationship between the predictor and response variables. To check this assumption, we will examine a scatterplot of the residuals versus the predictor variable. 
@@ -128,7 +133,9 @@ Create a scatterplot with the predictor variable on the *x* axis and residuals o
 
 ```{r}
 ggplot(elmhurst_resid, aes(x = family_income, y = resid)) +
-  geom_point()
+  geom_point() +
+  labs(x = 'Family Income (Thousands of Dollars)', y = 'Residuals',
+       title = 'Residuals from Linear Model against Family Income')
 ```
 
 
