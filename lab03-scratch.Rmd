@@ -135,7 +135,8 @@ Create a scatterplot with the predictor variable on the *x* axis and residuals o
 ggplot(elmhurst_resid, aes(x = family_income, y = resid)) +
   geom_point() +
   labs(x = 'Family Income (Thousands of Dollars)', y = 'Residuals',
-       title = 'Residuals from Linear Model against Family Income')
+       title = 'Residuals from Linear Model against Family Income') +
+  geom_hline(yintercept = 0, linetype = 'dashed')
 ```
 
 
@@ -146,12 +147,15 @@ ggplot(elmhurst_resid, aes(x = family_income, y = resid)) +
 
 Based on this, is the linearity condition is satisfied? Briefly explain your reasoning. 
 
+There is not discernible shape in the plot of the residuals. Since the residuals appear to be randomly scattered around 0, then we would say that the linearity condition is satisfied. If there was some observable shape in the plot of the residuals, then it means that there is some relationship between gift aid and family income that is not described well by our linear model.
+
 10. Recall that when we fit a regression model, we assume for any given value of $x$, the $y$ values follow the Normal distribution with mean $\beta_0 + \beta_1 x$ and variance $\sigma^2$. We will look at two sets of plots to check that this assumption holds.
 
     We begin by checking the constant variance assumption, i.e that the variance of $y$ is approximately equal for each value of $x$. To check this, we will use the scatterplot of the residuals versus the predictor variable $x$. Ideally, as we move from left to right, the spread of the $y$'s will be approximately equal, i.e. there is no "fan" pattern.
 
     Using the scatterplot from Exercise 8 , is the constant variance assumption satisfied? Briefly explain your reasoning. *Note: You don't need to know the value of $\sigma^2$ to answer this question.*
 
+We would argue that the constant variance assumption is satisfied. Looking at the plot from exercise 8, for all levels of family income, the residuals are spread a similar amount around 0. That being said we don't have perfectly constant variance. There are a few points around the \$75,000-100,000 family income mark where the residuals are over \$10,000 away from 0. That being said, these are only a few observations so we would still say the constant variance assumption is satisfied. Also, for some of the observations with family income over \$200,000 we have residuals fairly far from 0. That being said, we would argue that this may be due to having such few observations for family income over \$200,000. So we would still conclude that the constant variance assumption is satisfied.
 
 11. Next, we will assess with Normality assumption, i.e. that the distribution of the $y$ values is Normal at every value of $x$. In practice, it is impossible to check the distribution of $y$ at every possible value of $x$, so we can check whether the assumption is satisfied by looking at the overall distribution of the residuals. The assumption is satisfied if the distribution of residuals is approximately Normal, i.e. unimodal and symmetric.
 
