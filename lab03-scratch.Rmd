@@ -161,7 +161,17 @@ We would argue that the constant variance assumption is satisfied. Looking at th
 
     Make a histogram of the residuals. Based on the histogram, is the Normality assumption satisfied? Briefly explain your reasoning. 
 
+```{r}
+ggplot(data = elmhurst_resid, mapping = aes(resid)) +
+  geom_histogram(bins = 20) +
+  labs(x = 'Residuals', title = 'Distribution of Residuals')
+```
+
+It doesn't look like the normality condition is satisfied. While there is a little bit of symmetry to the distribution, the histogram is bimodal with 2 large spikes at around -5 and 0.
+
 12. The final assumption is that the observations are independent, i.e. one observation does not affect another. We can typically make an assessment about this assumption using a description of the data. Do you think the independence assumption is satisfied? Briefly explain your reasoning. 
+
+Yes, the independence assumption is satisfied. Since the sample is a random sample from the 2011 class, then we can claim that observations are independent from one another.
 
 ## Using the Model
 
