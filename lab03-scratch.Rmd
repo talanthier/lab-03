@@ -178,8 +178,22 @@ Yes, the independence assumption is satisfied. Since the sample is a random samp
 13. Calculate $R^2$ for this model and interpret it in the context of the data.
 
 
+```{r}
+rsquare(income_model, elmhurst)
+```
+
+For our model we have the single predictor variable 'family_income' to help predict 'gift_aid'. We found an $R^2$ of 0.249. That means that our model using just family income explains 24.86% of the variation in gift aid.
+
 14. Suppose a high school senior is considering Elmhurst College, and she would like to use your regression model to estimate how much gift aid she can expect to receive. Her family income is $90,000. Based on your model, about how much gift aid should she expect to receive? Show the code or calculations you use to get the prediction. 
 
-15. Another high school senior is considering Elmhurst College, and her family income is about $310,000. Do you think it would be wise to use your model calculate the predicted gift aid for this student?  Briefly explain your reasoning. 
+```{r}
+x0 <- data.frame(family_income = c(90))
+predict.lm(income_model, x0,interval = 'prediction', conf.level = 0.95)
+```
+Based on our model, we would expect that this student would receive \$20,443 of gift aid.
+
+15. Another high school senior is considering Elmhurst College, and her family income is about $310,000. Do you think it would be wise to use your model calculate the predicted gift aid for this student?  Briefly explain your reasoning.
+
+No. It would be unwise to use this model to predict gift aid for this student. Going back to our summary statistics for family income, in our dataset, the largest family income observed is around \$270,000. Thus our model would only be appropriate for predicting gift aid for students whose family incomes lie at or below \$270,000. From the dataset provided, we have no way of knowing that the linear relationship measured can be appropriately extended for families with higher incomes. Seeing as \$310,000 is far above this range, it would be inappropriate to use this model to predict gift aid for this student.
 
 *You're done and ready to submit your work! Knit, commit, and push all remaining changes. You can use the commit message "Done with Lab 2!", and make sure you have pushed all the files to GitHub (your Git pane in RStudio should be empty) and that <u>all</u> documents are updated in your repo on GitHub. Then submit the assignment on Gradescope following the instructions below.*
