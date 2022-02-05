@@ -196,4 +196,4 @@ Based on our model, we would expect that this student would receive \$20,443 of 
 
 No. It would be unwise to use this model to predict gift aid for this student. Going back to our summary statistics for family income, in our dataset, the largest family income observed is around \$270,000. Thus our model would only be appropriate for predicting gift aid for students whose family incomes lie at or below \$270,000. From the dataset provided, we have no way of knowing that the linear relationship measured can be appropriately extended for families with higher incomes. Seeing as \$310,000 is far above this range, it would be inappropriate to use this model to predict gift aid for this student.
 
-*You're done and ready to submit your work! Knit, commit, and push all remaining changes. You can use the commit message "Done with Lab 2!", and make sure you have pushed all the files to GitHub (your Git pane in RStudio should be empty) and that <u>all</u> documents are updated in your repo on GitHub. Then submit the assignment on Gradescope following the instructions below.*
+Github: https://github.com/talanthier/lab-03
